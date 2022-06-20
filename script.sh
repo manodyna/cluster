@@ -28,12 +28,7 @@ echo $VER
 #for cri-dockered
 wget https://github.com/Mirantis/cri-dockerd/releases/download/${VER}/cri-dockerd-${VER}-linux-amd64.tar.gz
 tar xvf cri-dockerd-${VER}-linux-amd64.tar.gz
-
 sudo mv cri-dockerd /usr/local/bin/
-
-cri-dockerd --version
-cri-dockerd 0.2.0 (HEAD)
-
 wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.service
 wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.socket
 sudo mv cri-docker.socket cri-docker.service /etc/systemd/system/
