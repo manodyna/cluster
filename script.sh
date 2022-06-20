@@ -28,9 +28,12 @@ echo $VER
 #for cri-dockered
 wget https://github.com/Mirantis/cri-dockerd/releases/download/${VER}/cri-dockerd-${VER}-linux-amd64.tar.gz
 tar xvf cri-dockerd-${VER}-linux-amd64.tar.gz
+
 sudo mv cri-dockerd /usr/local/bin/
+
 cri-dockerd --version
 cri-dockerd 0.2.0 (HEAD)
+
 wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.service
 wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.socket
 sudo mv cri-docker.socket cri-docker.service /etc/systemd/system/
@@ -39,3 +42,11 @@ sudo systemctl daemon-reload
 sudo systemctl enable cri-docker.service
 sudo systemctl enable --now cri-docker.socket
 sudo systemctl start kubelet
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+helm repo add traefik-mesh https://helm.traefik.io/mesh
+helm repo update
+export K3S_KUBECONFIG_MODE="644"
+curl -sfL https://get.k3s.io | sh -s - --docker
+helm install traefik-mesh traefik-mesh/traefik-mesh
