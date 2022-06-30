@@ -1,5 +1,5 @@
 #!/bin/bash
-kubeadm join 10.1.10.63:6443 --token f04vj7.7jd3bvwfq2u321an \
-	--discovery-token-ca-cert-hash sha256:21b7e786c4b5b0d835ad027809268800c631158bab3e2fccdc9e1e42daca691c \
+sudo kubeadm join 10.1.10.63:6443 --token 85rnqz.zctn8cc47q1w595c \
+	--discovery-token-ca-cert-hash sha256:d78598d8dd58e453e42af262501e8c1ff8cbcd9ce4d1cbb649ef9b4f3b5b307f \
 	--node-name node01
 

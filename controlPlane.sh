@@ -1,6 +1,9 @@
 #!/bin/bash
 sudo rm /etc/containerd/config.toml
 sudo systemctl restart containerd
+sed -i "s/cgroupDriver: systemd/cgroupDriver: cgroupfs/g" /var/lib/kubelet/config.yaml
+systemctl daemon-reload
+systemctl restart kubelet
 kubeadm init 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
